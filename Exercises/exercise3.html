@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Bar - Solution</title>
+    <script>
+      function init() {
+        setTimeout(() => {
+          const progress = document.querySelector(".progress-done");
+          progress.style.width = "100%";
+        }, 5000);
+      }
+      function resetProgress() {
+        const progress = document.querySelector(".progress-done");
+        progress.style.width = "0%";
+      }
+    </script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        background: #101319;
+      }
+      .reset-btn {
+        width: 12em;
+        height: 4em;
+        border: 0;
+        background: #9fa0ff;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        color: #ffffff;
+      }
+      .reset-btn:hover {
+        background: #bbadff;
+      }
+      .progress {
+        background-color: #f5f5f5;
+        border-color: #8895b3;
+        border-radius: 0.5em;
+        border-width: 0.5em;
+        border-style: solid;
+        height: 4em;
+        width: 60em;
+      }
+      .progress-done {
+        background: linear-gradient(to left, #8e94f2, #dab6fc);
+        height: 100%;
+        width: 0;
+        transition: 3s ease;
+      }
+    </style>
+  </head>
+  <body onload="init()">
+    <button class="reset-btn" onclick="resetProgress()">
+      Reset Loading Bar
+    </button>
+    <div class="progress">
+      <div class="progress-done" data-done="100"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <!--<button onclick="increase()">increase</button>-->
+    <button onclick="decrease()" class = "text" id="button"><strong>Reset Loading Bar</strong></button>
+    <!--<button onclick="console.log(width)">console</button>-->
+    <script>
+        setTimeout(() => {  increase(); }, 3000);
+        var interval;
+        var width = 0
+        function increase(){
+            interval = setInterval(up, 0.3)
+            function up(){
+                if (width >= 600) {
+                    clearInterval(interval)
+                    document.getElementById("button").disabled = false; 
+                } else if (width < 75){
+                    width += 0.25
+                    document.getElementById("bar").style.width = width+"px";
+                    document.getElementById("button").disabled = true;
+                } else if (width >= 75 && width < 150) {
+                    width++
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 150 && width < 300) {
+                    width += 2
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 300 && width < 450) {
+                    width += 1.5
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 450 && width < 525) {
+                    width += 1
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 525) {
+                    width += 0.25
+                    document.getElementById("bar").style.width = width+"px";
+                }
+            }
+        }
+        function decrease(){
+            interval = setInterval(down, 0.3)
+            function down(){
+                if (width <= 0) {
+                    clearInterval(interval)
+                    setTimeout(() => {  increase(); }, 3000);
+                    document.getElementById("button").disabled = false; 
+                } else if (width <= 600 && width > 525){
+                    width -= 0.25
+                    document.getElementById("bar").style.width = width+"px";
+                    document.getElementById("button").disabled = true;
+                } else if (width >= 525 && width < 600) {
+                    width--
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 450 && width < 525) {
+                    width -= 2
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 150 && width < 450) {
+                    width -= 1.5
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width >= 75 && width < 150) {
+                    width -= 1
+                    document.getElementById("bar").style.width = width+"px";
+                } else if (width <= 75) {
+                    width -= 0.25
+                    document.getElementById("bar").style.width = width+"px";
+                }
+            }
+        }
+    </script>
+    <style>
+        .text{
+            position: absolute;
+            margin: 20px;
+            left: 285px;
+            color: white;
+            text-align: center;
+            background-color: #9694fb;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .text:hover{
+            background-color: #b0a0fc;
+        }
+        #box{
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            height: 20px;
+            width: 600px;
+            height: 40px;
+            border: 5px solid grey;
+            border-radius: 8px;
+            background-color: white;
+        }
+        #bar{
+            position: absolute;
+            top: 85px;
+            left: 85px;
+            height: 40px;
+            width: 0px;
+            background-image: linear-gradient(to right, #caacf4, #8787ee);
+        }
+    </style>
+    <body style="background-color: black;">
+        <div id="box"></div>
+        <div id="bar"></div>
+    </body>
+</html>
