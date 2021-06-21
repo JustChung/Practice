@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <span id="pScore" class="score">Player's Score:</span>
+    <span id="cScore" class="score">Computer's Score:</span>
+    <br>
+    <div>
+        <p id="pChoice">Player's Choice: </p>
+        <p id="cChoice">Computer's Choice: </p>
+        <img src="paper.png" width="150" height="150" id="pImage">
+        <img src="paper.png" width="150" height="150" id="cImage">
+    </div>
+    <div id="options">
+        <img src="rock.png" width="150" height="150" onclick="calcWinner(0);" class="rockButton button">
+        <img src="paper.png" width="150" height="150" onclick="calcWinner(1);" class="paperButton button">
+        <img src="scissors.png" width="150" height="150" onclick="calcWinner(2);" class="scissorsButton button">
+    </div>
+    <p id="winner">Winner: </p>
+    <script>
+        var pCounter = 0
+        var cCounter = 0
+        const options = ["rock", "paper", "scissors"]
+        const results = ["draw", "paper", "rock", "scissors"]
+        function check (random, choice){
+                let determineWinner = random + choice
+                let winner;
+                if (options[choice]==results[determineWinner]){
+                    winner="player"
+                } else {
+                    winner="computer"
+                }
+                return winner
+            }
+        function editScreen(choice, random){
+            document.getElementById("pScore").innerHTML = "Player's Score: "+pCounter
+            document.getElementById("cScore").innerHTML = "Computer's Score: "+cCounter
+            document.getElementById("pChoice").innerHTML = "Player's Choice: "+options[choice]
+            document.getElementById("cChoice").innerHTML = "Computer's Choice: "+options[random]
+            document.getElementById("pImage").src = options[choice]+".png"
+            document.getElementById("pImage").style.display = "block"
+            document.getElementById("cImage").src = options[random]+".png"
+            document.getElementById("cImage").style.display = "block"
+
+
+
+            if (choice==random) {
+                document.getElementById("winner").innerHTML = "Winner: draw"
+            } else {
+                document.getElementById("winner").innerHTML = "Winner: "+check(random,choice)
+            }
+        }
+        function calcWinner(choice){
+            random = Math.floor(Math.random()*3);
+            if (choice==random) {
+                editScreen(choice, random)
+            } else if (check(random, choice)=="computer") {
+                cCounter++
+                editScreen(choice, random)
+            } else if (check(random, choice)=="player") {
+                pCounter++
+                editScreen(choice, random)
+            } 
+        }
+    </script>
+    <style>
+        .button {
+            position: relative;
+            cursor: pointer;
+            animation-duration: 2.5s;
+            animation-iteration-count: infinite;
+        }
+        .button:hover{
+            animation-name: bounceAnimation;
+            animation-timing-function: ease;
+        }
+        @keyframes bounceAnimation {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-40px); }
+            100% { transform: translateY(0); }
+            }
+
+        .rockButton {
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        .paperButton {
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        .scissorsButton {
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        #options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .score {
+            padding: 10px;
+            width: 300px;
+            border: 5px solid black;
+            font-family: Impact;
+        }
+        #cScore {
+            position: absolute;
+            right: 0px;
+        }
+        #pScore {
+            position: absolute;
+            left: 0px;
+        }
+        #pChoice {
+            margin-top: 3%;
+            position: absolute;
+            left: 5px;
+        }
+        #cChoice {
+            margin-top: 3%;
+            position: absolute;
+            right: 5px;
+        }
+        #winner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #pImage {
+            display: none;
+            position: absolute;
+            left: 50px;
+            margin-top: 100px;
+        }
+        #cImage {
+            display: none;
+            position: absolute;
+            right: 50px;
+            margin-top: 100px;
+        }
+    </style>
+</html>
